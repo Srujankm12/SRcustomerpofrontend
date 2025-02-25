@@ -302,7 +302,7 @@
                         required
                     />
                 </div>
-                                    <!-- MEI PO No -->
+                               
                     <div>
                         <label for="mei_po_no" class="block text-sm font-medium text-gray-700">
                             MEI PO No
@@ -316,7 +316,6 @@
                         />
                     </div>
 
-            <!-- Month of Delivery Scheduled -->
             <div>
                 <label for="month_of_delivery_scheduled" class="block text-sm font-medium text-gray-700">
                     Month of Delivery Scheduled
@@ -329,7 +328,7 @@
                 />
             </div>
 
-            <!-- Category -->
+
             <div>
                 <label for="category" class="block text-sm font-medium text-gray-700">
                     Category

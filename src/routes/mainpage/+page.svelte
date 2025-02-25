@@ -2,7 +2,7 @@
     import { goto } from "$app/navigation";
     import Header from "$lib/header.svelte";
 
-    let isLoading = false; // Ensure this is set properly, or manage state dynamically
+    let isLoading = false; 
 </script>
 
 <div class="min-h-screen flex flex-col bg-white">
@@ -10,7 +10,7 @@
 
     {#if isLoading}
         <div class="flex justify-center items-center h-full">
-            <div class="animate-spin h-12 w-12 rounded-full border-t-4 border-gray-800 border-gray-300"></div>
+            <div class="animate-spin h-12 w-12 rounded-full border-t-4 border-gray-800 "></div>
         </div>
     {:else}
         <div class="relative h-screen bg-white text-black">

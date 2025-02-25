@@ -9,7 +9,6 @@
     let showDownloadMessage = false;
     let showUpdateModal = false;
     let selectedRow = null;
-
     let customers = [];
     let bsNumbers = [];
     let units = [];
@@ -194,7 +193,7 @@
     function searchTable() {
     const query = searchQuery.toLowerCase().trim();
     if (!query) {
-        filteredData = [...data]; // Reset when search query is empty
+        filteredData = [...data]; 
         return;
     }
 
@@ -222,7 +221,7 @@
           </div>
                   {#if isLoading}
             <div class="flex justify-center items-center h-full">
-                <div class="animate-spin h-12 w-12 rounded-full border-t-4 border-gray-800 border-gray-300"></div>
+                <div class="animate-spin h-12 w-12 rounded-full border-t-4 border-gray-800"></div>
             </div>
         {:else}
             <div class="overflow-x-auto bg-gray-100 shadow-lg rounded-lg">
@@ -332,12 +331,13 @@
   
 
 {#if showUpdateModal}
-<div class="fixed inset-0  flex items-center justify-center" transition:fade>
-    <div class="w-full max-w-2xl mx-4 bg-white rounded-lg p-6 shadow-md relative">
-        <h1 class="text-center text-xl py-2 mb-6 font-medium text-gray-900">Update customer Details</h1>
+<div class="fixed inset-0 flex bg-black opacity-50 items-center justify-center z-50 transition-opacity">
+    <div class="w-full max-w-4xl mx-4 bg-white rounded-lg p-4 shadow-xl relative">
+        <h1 class="text-center text-xl py-2 mb-6 font-semibold text-gray-900">Update </h1>
 
-        <form on:submit|preventDefault={updateCustomer}>
-            <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
+
                 <div>
                     <label for="sra_engineer_name" class="block text-sm font-medium text-gray-700">SRA Engineer Name</label>
                     <input type="text" 
@@ -580,7 +580,8 @@
                     {/if}
                 </button>
             </div>
-        </form>
+        
+
         <!-- svelte-ignore a11y_consider_explicit_label -->
         <button
             class="absolute top-4 right-4 text-gray-500"

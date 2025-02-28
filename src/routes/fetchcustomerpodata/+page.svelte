@@ -204,6 +204,20 @@
         return engineerName.includes(query) || customerName.includes(query);
     });
 }
+function formatToInputDate(timestamp) {
+  if (!timestamp) return "";
+  const date = new Date(timestamp);
+  return date.toISOString().split("T")[0]; // Returns "YYYY-MM-DD"
+}
+function formatDateToDayMonthYear(dateString) {
+    if (!dateString) return "N/A";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
 
 </script>
 
@@ -276,7 +290,7 @@
                                 <td class="py-3 px-4 text-center">{row.customer_name}</td>
                                 <td class="py-3 px-4 text-center">{row.bs_no}</td>
                                 <td class="py-3 px-4 text-center">{row.customer_po_no}</td>
-                                <td class="py-3 px-4 text-center">{row.po_date ? new Date(row.po_date).toLocaleDateString() : "N/A"}</td>
+                                <td class="py-3 px-4 text-center">{formatDateToDayMonthYear(row.po_date) ?? "N/A"}</td>
                                 <td class="py-3 px-4 text-center">{row.part_code}</td>
                                 <td class="py-3 px-4 text-center">{row.quantity}</td>
                                 <td class="py-3 px-4 text-center">{row.unit}</td>
@@ -284,7 +298,7 @@
                                 <td class="py-3 px-4 text-center">{row.po_status_dd}</td>
                                 <td class="py-3 px-4 text-center">{row.concerns_on_order}</td>
                                 <td class="py-3 px-4 text-center">₹{row.billable_scheduled_value ? row.billable_scheduled_value.toFixed(2) : "0.00"}</td>
-                                <td class="py-3 px-4 text-center">{row.delivery_schedule_as_per_customer_po ?? "N/A"}</td>
+                                <td class="py-3 px-4 text-center">{formatDateToDayMonthYear(row.delivery_schedule_as_per_customer_po) ?? "N/A"}</td>
                                 <td class="py-3 px-4 text-center">{row.customer_clearance_for_billing ?? "N/A"}</td>
                                 <td class="py-3 px-4 text-center">{row.reserved_quantity_from_stock ?? 0}</td>
                                 <td class="py-3 px-4 text-center">{row.required_quantity_to_order ?? 0}</td>
@@ -296,7 +310,7 @@
                                 <td class="py-3 px-4 text-center">₹{row.pending_value_against_po ? row.pending_value_against_po.toFixed(2) : "0.00"}</td>
                                 <td class="py-3 px-4 text-center">₹{row.pending_order_value ? row.pending_order_value.toFixed(2) : "0.00"}</td>
                                 <td class="py-3 px-4 text-center">₹{row.reserved_quantity_stock_value ? row.reserved_quantity_stock_value.toFixed(2) : "0.00"}</td>
-                                <td class="py-3 px-4 text-center">{row.month_of_delivery_scheduled ?? "N/A"}</td>
+                                <td class="py-3 px-4 text-center">{formatDateToDayMonthYear(row.month_of_delivery_scheduled) ?? "N/A"}</td>
                                 <td class="py-3 px-4 text-center">{row.category}</td>
                         
                                 <td class="py-3 px-4 text-center">
@@ -332,12 +346,12 @@
   
 
 {#if showUpdateModal}
-<div class="fixed inset-0 bg-black opacity-45 z-40 ">
-    <div class="flex items-center justify-center z-40">
-    <div class="w-full max-w-4xl mx-4 bg-white rounded-lg p-4 shadow-xl relative space-y-8">
+<div class="fixed inset-0 bg-black opacity-50 z-40"></div> <!-- Background Overlay -->
+<div class="fixed inset-0 flex items-center justify-center z-50">
+    <div class="w-full max-w-4xl mx-4 bg-white rounded-lg p-4 shadow-lg relative">
 
         <form on:submit={updateCustomer} class="bg-white shadow-xl rounded-lg p-8 space-y-8">
-            <h1 class="text-center text-xl py-2 mb-6 font-semibold text-gray-900">Update </h1>
+            <h1 class="text-center text-xl py-2 mb-6 font-semibold text-gray-900">Update Customer PO </h1>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 
@@ -582,7 +596,7 @@
                     {#if isUpdating}
                         Updating...
                     {:else}
-                        Update Stock
+                        Update 
                     {/if}
                 </button>
             </div>
@@ -598,7 +612,7 @@
         </form>
     </div>
 </div>
-</div>
+
 {/if}
 </div>
 

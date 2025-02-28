@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import Header from "$lib/header.svelte";
     import { fade } from "svelte/transition";
+	import { on } from "svelte/events";
 
     let data = [];
     let isLoading = true;
@@ -333,7 +334,9 @@
 {#if showUpdateModal}
 <div class="fixed inset-0 flex bg-black opacity-50 items-center justify-center z-50 transition-opacity">
     <div class="w-full max-w-4xl mx-4 bg-white rounded-lg p-4 shadow-xl relative">
-        <h1 class="text-center text-xl py-2 mb-6 font-semibold text-gray-900">Update </h1>
+
+        <form on:submit={updateCustomer} class="bg-white shadow-xl rounded-lg p-8 space-y-8">
+            <h1 class="text-center text-xl py-2 mb-6 font-semibold text-gray-900">Update </h1>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 
@@ -572,7 +575,10 @@
                 />
             </div>           </div>
             <div class="flex justify-end">
-                <button type="submit" class="px-6 py-2 bg-black text-white rounded-md" disabled={isUpdating}>
+                <button type="submit" class="px-6 py-2 bg-black text-white rounded-md" disabled={isUpdating}
+       
+                >
+                
                     {#if isUpdating}
                         Updating...
                     {:else}

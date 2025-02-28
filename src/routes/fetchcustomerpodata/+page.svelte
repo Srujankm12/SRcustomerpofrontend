@@ -332,7 +332,7 @@
   
 
 {#if showUpdateModal}
-<div class="fixed inset-0 flex bg-black opacity-50 items-center justify-center z-50 transition-opacity">
+<div class="fixed inset-0 flex opacity-50 items-center justify-center z-20 transition-opacity">
     <div class="w-full max-w-4xl mx-4 bg-white rounded-lg p-4 shadow-xl relative">
 
         <form on:submit={updateCustomer} class="bg-white shadow-xl rounded-lg p-8 space-y-8">

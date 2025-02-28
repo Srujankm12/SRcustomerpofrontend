@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { writable, get } from 'svelte/store';
-    import Header from '$lib/Header.svelte';
+    import Header from '$lib/header.svelte';
 
     let formData = writable({
         sra_engineer_name: '',
@@ -31,10 +31,9 @@
     let poStatuses = writable([]);
     let concernsOnOrders = writable([]);
 
-    // Fetch dropdown data
     const fetchDropdownData = async () => {
         try {
-            const response = await fetch('http://localhost:8000/dropdown');
+            const response = await fetch('https://srcustomerpobackend.onrender.com/dropdown');
             if (response.ok) {
                 const data = await response.json();
                 customers.set([...new Set(data.map(item => item.customer_name))]);
@@ -52,13 +51,13 @@
 
     onMount(fetchDropdownData);
 
-    // Handle form submission
+  
     const handleSubmit = async (event) => {
         event.preventDefault();
         let formDataValue = get(formData);  
 
         try {
-            const response = await fetch('http://localhost:8000/submit', {
+            const response = await fetch('https://srcustomerpobackend.onrender.com/submit', {
                 method: 'POST', 
                 body: JSON.stringify(formDataValue),
             });

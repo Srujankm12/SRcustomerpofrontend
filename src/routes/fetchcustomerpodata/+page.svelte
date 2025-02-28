@@ -41,13 +41,13 @@
     };
 
     let isUpdating = false;
-    const fetchurl = "http://localhost:8000/fetch";
-    const downloadexcelurl = "http://localhost:8000/download";
-    const updateurl = "http://localhost:8000/update";
+    const fetchurl = "https://srcustomerpobackend.onrender.com/fetch";
+    const downloadexcelurl = "https://srcustomerpobackend.onrender.com/download";
+    const updateurl = "https://srcustomerpobackend.onrender.com/update";
 
     async function fetchDropdownData() {
         try {
-            const response = await fetch("http://localhost:8000/dropdown");
+            const response = await fetch("https://srcustomerpobackend.onrender.com/dropdown");
             if (response.ok) {
                 const dropdownData = await response.json();
                 customers = [...new Set(dropdownData.map(item => item.customer_name))];

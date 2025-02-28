@@ -332,8 +332,9 @@
   
 
 {#if showUpdateModal}
-<div class="fixed inset-0 flex opacity-50 items-center justify-center z-20 transition-opacity">
-    <div class="w-full max-w-4xl mx-4 bg-white rounded-lg p-4 shadow-xl relative">
+<div class="fixed inset-0 bg-black opacity-45 z-40 ">
+    <div class="flex items-center justify-center z-40">
+    <div class="w-full max-w-4xl mx-4 bg-white rounded-lg p-4 shadow-xl relative space-y-8">
 
         <form on:submit={updateCustomer} class="bg-white shadow-xl rounded-lg p-8 space-y-8">
             <h1 class="text-center text-xl py-2 mb-6 font-semibold text-gray-900">Update </h1>
@@ -596,6 +597,7 @@
         </button>
         </form>
     </div>
+</div>
 </div>
 {/if}
 </div>

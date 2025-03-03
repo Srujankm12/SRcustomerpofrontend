@@ -17,7 +17,8 @@
     let concernsOnOrders = [];
     let filteredData = [];
     let searchQuery = "";
-
+    let showDeleteModal = false;
+    let rowToDelete = null;
     let UpdateData = {
         sra_engineer_name: "",
         supplier: "",
@@ -171,6 +172,31 @@
         }
     }
 
+    function confirmDelete(row) {
+        rowToDelete = row;
+        showDeleteModal = true;
+    }
+
+    async function deleteCustomer() {
+        if (!rowToDelete) return;
+
+        try {
+            const response = await fetch(`https://srcustomerpobackend.onrender.com/${rowToDelete.id}`, {
+                method: "POST",
+            });
+
+            if (response.ok) {
+                console.log("Customer PO deleted successfully.");
+                showDeleteModal = false;
+                rowToDelete = null;
+                await fetchData(); 
+            } else {
+                console.error("Failed to delete customer PO:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error deleting customer PO:", error);
+        }
+    }
     function convertToIST(timestamp) {
         if (!timestamp) return "Invalid Date";
         const date = new Date(timestamp);
@@ -272,7 +298,8 @@ function formatDateToDayMonthYear(dateString) {
                             <th class="py-3 px-4">Reserved Stock Value</th>
                             <th class="py-3 px-4">Month of Delivery</th>
                             <th class="py-3 px-4">Category</th>
-                            <th class="py-3 px-4">Actions</th>
+                            <th class="py-3 px-4">Update</th>
+                            <th class="py-3 px-4">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -315,15 +342,23 @@ function formatDateToDayMonthYear(dateString) {
                         
                                 <td class="py-3 px-4 text-center">
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
-                                    <button
+                                     <button
                                     class="text-xl font-medium rounded-full flex items-center justify-center text-center"
                                     on:click={() => openUpdateModal(row)}
-                                >
+                                            >
                                     <i class="fas fa-edit"></i>
-                                </button>
-                                       
-                                    </td>
-                                </tr>
+                                    </button>
+           
+        </td>
+    <td class="py-3 px-4 text-center">
+        
+        <button class="bg-red-500 text-white px-3 py-1 rounded ml-2" on:click={() => confirmDelete(row)}>Delete</button>
+    
+    </td>
+    
+                            
+                                 
+                                    </tr>
                             {/each}
                         {/if}
                     </tbody>
@@ -350,7 +385,7 @@ function formatDateToDayMonthYear(dateString) {
 <div class="fixed inset-0 flex items-center justify-center z-50">
     <div class="w-full max-w-4xl mx-4 bg-white rounded-lg p-4 shadow-lg relative">
 
-        <form on:submit={updateCustomer} class="bg-white shadow-xl rounded-lg p-8 space-y-8">
+        <form on:submit|preventDefault={updateCustomer} class="bg-white shadow-xl rounded-lg p-8 space-y-8">
             <h1 class="text-center text-xl py-2 mb-6 font-semibold text-gray-900">Update Customer PO </h1>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -613,6 +648,19 @@ function formatDateToDayMonthYear(dateString) {
     </div>
 </div>
 
+{/if}
+{#if showDeleteModal}
+<div class="fixed inset-0 flex items-center justify-center  bg-black opacity-60 z-9">
+
+    <div class="bg-white p-6 rounded-lg shadow-xl">
+        <h2 class="text-lg font-semibold text-black">Confirm Deletion</h2>
+        <p class="text-black">Are you sure you want to delete this record?</p>
+        <div class="mt-4 flex justify-end">
+            <button class="bg-gray-400 text-white px-4 py-2 rounded mr-2" on:click={() => showDeleteModal = false}>Cancel</button>
+            <button class="bg-red-500 text-white px-4 py-2 rounded" on:click={deleteCustomer}>Delete</button>
+        </div>
+    </div>
+</div>
 {/if}
 </div>
 

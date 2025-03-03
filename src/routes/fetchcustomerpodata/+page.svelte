@@ -539,7 +539,7 @@ function formatDateToDayMonthYear(dateString) {
 
                 <div>
                     <label for="delivery_schedule_as_per_customer_po" class="block text-sm font-medium text-gray-700">
-                        Delivery Schedule - As per Customer PO
+                        Delivery As per Customer PO
                     </label>
                     <input type="date" 
                         id="delivery_schedule_as_per_customer_po"

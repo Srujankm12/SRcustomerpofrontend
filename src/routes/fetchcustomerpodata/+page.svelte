@@ -181,7 +181,7 @@
         if (!rowToDelete) return;
 
         try {
-            const response = await fetch(`https://srcustomerpobackend.onrender.com/${rowToDelete.id}`, {
+            const response = await fetch(`https://srcustomerpobackend.onrender.com/delete/${rowToDelete.id}`, {
                 method: "POST",
             });
 
@@ -650,13 +650,14 @@ function formatDateToDayMonthYear(dateString) {
 
 {/if}
 {#if showDeleteModal}
-<div class="fixed inset-0 flex items-center justify-center  bg-black opacity-60 z-9">
+<div class="fixed inset-0 flex items-center justify-center z-10">
+    <div class="absolute inset-0 bg-black opacity-60"></div>
 
-    <div class="bg-white p-6 rounded-lg shadow-xl">
+    <div class="relative bg-white p-6 rounded-lg shadow-xl z-20">
         <h2 class="text-lg font-semibold text-black">Confirm Deletion</h2>
         <p class="text-black">Are you sure you want to delete this record?</p>
         <div class="mt-4 flex justify-end">
-            <button class="bg-gray-400 text-white px-4 py-2 rounded mr-2" on:click={() => showDeleteModal = false}>Cancel</button>
+            <button class="bg-black text-white px-4 py-2 rounded mr-2" on:click={() => showDeleteModal = false}>Cancel</button>
             <button class="bg-red-500 text-white px-4 py-2 rounded" on:click={deleteCustomer}>Delete</button>
         </div>
     </div>

@@ -310,7 +310,7 @@ function formatDateToDayMonthYear(dateString) {
                         {:else}
                             {#each filteredData as row, index}
                             <tr class="border-t border-gray-300 hover:bg-gray-200">
-                                <td class="py-3 px-4 text-center">{row.id}</td>
+                                <td class="py-3 px-4 text-center">{index+1}</td>
 
                                 <td class="py-3 px-4 text-center">{row.sra_engineer_name}</td>
                                 <td class="py-3 px-4 text-center">{row.supplier}</td>
